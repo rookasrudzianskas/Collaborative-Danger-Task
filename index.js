@@ -8,10 +8,9 @@ const jwt = require('jsonwebtoken');
 
 const DB_URI="mongodb+srv://admin:admin@cluster0.nrccl.mongodb.net/taskade?retryWrites=true&w=majority";
 const DB_NAME="taskade"
+const JWT_SECRET='dsfasdjflsdflksdkfjdlskf';
 
-const getToken = (user) => {
-    jwt.sign({id: user.id}, '', {expiredIn: '7 days'});
-}
+const getToken = (user) => jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: '7 days'});
 
 dotenv.config();
 
@@ -90,7 +89,7 @@ const resolvers = {
             const user = result.ops[0]
             return {
                 user,
-                token: 'token'
+                token: getToken(user)
             }
 
         },
@@ -105,7 +104,7 @@ const resolvers = {
 
             return {
                 user,
-                token: 'token',
+                token: getToken(user),
             }
 
         }
