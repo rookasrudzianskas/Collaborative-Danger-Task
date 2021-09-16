@@ -73,7 +73,10 @@ const resolvers = {
         signUp: (_, { input }) => {
             // console.log(input);
             const hashedPassword = bcrypt.hashSync(input.password);
-            console.log(hashedPassword);
+            const user = {
+                ...input,
+                password: hashedPassword
+            }
         },
         signIn: () => {
 
