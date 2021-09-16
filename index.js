@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
+const { MongoClient } = require('mongodb');
 
 dotenv.config();
 
@@ -13,6 +14,17 @@ const books = [
         author: 'Paul Auster',
     },
 ];
+
+
+
+const uri = "mongodb+srv://admin:<password>@cluster0.nrccl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+});
+
 
 
 // A schema is a collection of type definitions (hence "typeDefs")
