@@ -17,7 +17,7 @@ const books = [
 
 
 
-const uri = "mongodb+srv://admin:<password>@cluster0.nrccl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = "";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const collection = client.db("test").collection("devices");
