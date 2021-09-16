@@ -95,10 +95,7 @@ const resolvers = {
     },
 
     User: {
-        id: (root) => {
-            // console.log(root);
-            return root._id;
-        }
+        id: ({ _id }) => _id
     }
 };
 // console.log("THIS IS DB", DB_URI);
