@@ -1,3 +1,5 @@
+import {Query} from "@apollo/client/react/components";
+
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
@@ -42,7 +44,9 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
-
+    Query: {
+        myTaskLists: () => []
+    }
 };
 // console.log("THIS IS DB", DB_URI);
 
