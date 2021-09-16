@@ -9,13 +9,17 @@ const DB_URI="mongodb+srv://admin:admin@cluster0.nrccl.mongodb.net/taskade?retry
 const DB_NAME="taskade"
 const JWT_SECRET='dsfasdjflsdflksdkfjdlskf';
 
-const getToken = (user) => jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: '7 days'});
+// "token": "",
+
+
+const getToken = (user) => jwt.sign({id: user._id}, JWT_SECRET, {expiresIn: '7 days'});
 const getUserFromToken = async (token, db) => {
     if(!token) {
         return null
     }
     // console.log('Hello');
     const tokenData = jwt.verify(token, JWT_SECRET);
+    // console.log(tokenData);
     if(!tokenData?.id) {
         return null;
     }
