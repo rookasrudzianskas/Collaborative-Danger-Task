@@ -14,6 +14,7 @@ const getUserFromToken = async (token, db) => {
     if(!token) {
         return null
     }
+    // console.log('Hello');
     const tokenData = jwt.verify(token, JWT_SECRET);
     if(!tokenData?.id) {
         return null;
@@ -137,9 +138,10 @@ const start = async() => {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
-        context: ({ req }) => {
+        context: async ({req}) => {
             // console.log(req.headers)
-            const user = getUserFromToken(req.headers.authorization, db);
+            const user = await getUserFromToken(req.headers.authorization, db);
+            console.log(user);
             return {
                 db,
                 user,
