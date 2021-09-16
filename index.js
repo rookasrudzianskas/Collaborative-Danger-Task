@@ -92,6 +92,12 @@ const resolvers = {
         signIn: () => {
 
         }
+    },
+
+    User: {
+        id: (root, data, context) => {
+
+        }
     }
 };
 // console.log("THIS IS DB", DB_URI);
