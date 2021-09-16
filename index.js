@@ -8,35 +8,13 @@ const DB_NAME="taskade"
 
 dotenv.config();
 
-const books = [
-    {
-        title: 'The Awakening',
-        author: 'Rokas Rudzianskas',
-    },
-    {
-        title: 'City of Glass',
-        author: 'Paul Auster',
-    },
-];
-
 const typeDefs = gql`
-    type Book {
-        title: String
-        author: String
-    }
-    
-    type Query {
-        books: [Book]
-    }
+
+
 `;
 
 const resolvers = {
-    Query: {
-        books: (root, data, context) => {
-            // console.log(context.db);
-            return books;
-        }
-    },
+
 };
 // console.log("THIS IS DB", DB_URI);
 
