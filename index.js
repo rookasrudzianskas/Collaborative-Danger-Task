@@ -69,7 +69,9 @@ const resolvers = {
         myTaskLists: () => []
     },
     Mutation: {
-        signUp: () => {
+        signUp: (_, { input }) => {
+            // console.log(input);
+
 
         },
         signIn: () => {
