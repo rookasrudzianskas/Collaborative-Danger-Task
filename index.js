@@ -97,8 +97,8 @@ const resolvers = {
             }
 
             // we need to check if the password is correct
-            const isPasswordCorrect = bcrypt.compareSync(input.password)
-            
+            const isPasswordCorrect = bcrypt.compareSync(input.password, user.password);
+
         }
     },
 
