@@ -1,4 +1,3 @@
-import {Query} from "@apollo/client/react/components";
 
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
@@ -13,7 +12,7 @@ dotenv.config();
 const typeDefs = gql`
     
     type Query {
-        myTaskLists: [TaskLists!]!
+        myTaskLists: [TaskList!]!
     }
     
     type User {
