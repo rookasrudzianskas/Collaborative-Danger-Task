@@ -3,6 +3,7 @@ const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
 // const {DB_URI, DB_NAME} = process.env;
+const bcrypt = require('bcryptjs');
 
 const DB_URI="mongodb+srv://admin:admin@cluster0.nrccl.mongodb.net/taskade?retryWrites=true&w=majority";
 const DB_NAME="taskade"
@@ -71,7 +72,8 @@ const resolvers = {
     Mutation: {
         signUp: (_, { input }) => {
             // console.log(input);
-
+            const hashedPassword = bcrypt.hashSync(input.password);
+            console.log(hashedPassword);
         },
         signIn: () => {
 
