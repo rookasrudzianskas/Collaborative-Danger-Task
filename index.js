@@ -92,7 +92,7 @@ const resolvers = {
         signIn: async(_, { input }, { db }) => {
             const user = await db.collection('Users').findOne({ email: input.email });
             // we need to check if the password is correct
-            const isPasswordCorrect = bcrypt.compareSync(input.password, user.password);
+            const isPasswordCorrect = user && bcrypt.compareSync(input.password, user.password);
 
             if(!user || !isPasswordCorrect) {
                 throw new Error("Invalid credentials");
