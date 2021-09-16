@@ -79,7 +79,7 @@ const resolvers = {
             }
             // save to the database
 
-            const result = await db.collection('Users').insert(newUser);
+            const result = await db.collection('Users').insertOne(newUser);
             // console.log("This is the result", result);
 
             const user = result.ops[0]
@@ -95,8 +95,9 @@ const resolvers = {
     },
 
     User: {
-        id: (root, data, context) => {
-
+        id: (root) => {
+            console.log(root);
+            return 'hello';
         }
     }
 };
