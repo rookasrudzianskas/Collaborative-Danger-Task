@@ -91,15 +91,11 @@ const resolvers = {
         },
         signIn: async(_, { input }, { db }) => {
             const user = await db.collection('Users').findOne({ email: input.email });
-
-            if(!user) {
-                throw new Error("Invalid credentials");
-            }
-
             // we need to check if the password is correct
-            const isPasswordCorrect = bcrypt.compareSync(input.password, user.password);
-            if(!isPasswordCorrect) {
-                throw new Error('Invalid credentials');
+            const isPasswordCorrect = bcrypt.compareSync(input.password, user?.password);
+
+            if(!user || !isPasswordCorrect) {
+                throw new Error("Invalid credentials");
             }
 
             return {
@@ -125,8 +121,6 @@ const start = async() => {
     const context = {
         db,
     }
-
-
     const server = new ApolloServer({typeDefs, resolvers, context});
 
     server.listen().then(({url}) => {
