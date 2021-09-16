@@ -48,7 +48,10 @@ const typeDefs = gql`
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
     Query: {
-        books: () => books,
+        books: (root, data, context) => {
+            console.log(context);
+            return books;
+        }
     },
 };
 // console.log("THIS IS DB", DB_URI);
