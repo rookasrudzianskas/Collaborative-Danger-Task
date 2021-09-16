@@ -72,7 +72,6 @@ const resolvers = {
         signUp: (_, { input }) => {
             // console.log(input);
 
-
         },
         signIn: () => {
 
