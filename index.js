@@ -49,7 +49,7 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         books: (root, data, context) => {
-            console.log(context);
+            // console.log(context.db);
             return books;
         }
     },
