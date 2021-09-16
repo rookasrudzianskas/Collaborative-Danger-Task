@@ -95,7 +95,10 @@ const resolvers = {
             if(!user) {
                 throw new Error("Invalid credentials");
             }
-            // console.log("This is the user", user);
+
+            // we need to check if the password is correct
+            const isPasswordCorrect = bcrypt.compareSync(input.password)
+            
         }
     },
 
