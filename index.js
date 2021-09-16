@@ -89,8 +89,8 @@ const resolvers = {
             }
 
         },
-        signIn: () => {
-
+        signIn: async(_, { input }, { db }) => {
+            const user = await db.collection('Users').findOne({ email: input.email })
         }
     },
 
