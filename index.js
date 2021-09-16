@@ -9,7 +9,12 @@ const DB_NAME="taskade"
 dotenv.config();
 
 const typeDefs = gql`
-
+    type User {
+        id: ID!
+        name: String!
+        email: String! 
+        avatar: String!
+    }
 
 `;
 
