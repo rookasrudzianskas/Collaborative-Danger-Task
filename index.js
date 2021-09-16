@@ -1,7 +1,10 @@
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
-const {DB_URI, DB_NAME} = process.env;
+// const {DB_URI, DB_NAME} = process.env;
+
+const DB_URI="mongodb+srv://admin:admin@cluster0.nrccl.mongodb.net/taskade?retryWrites=true&w=majority";
+const DB_NAME="taskade"
 
 dotenv.config();
 
@@ -48,6 +51,8 @@ const resolvers = {
         books: () => books,
     },
 };
+// console.log("THIS IS DB", DB_URI);
+
 
 const start = async() => {
     const client = new MongoClient(DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
