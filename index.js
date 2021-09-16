@@ -23,7 +23,14 @@ const typeDefs = gql`
         progress: Float!
         
         users: [User!]!
-#        todos
+    }
+    
+    type ToDo {
+        id: ID!
+        content: String!
+        isCompleted: Boolean!
+        
+        taskList: TaskList!
     }
 
 `;
