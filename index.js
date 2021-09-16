@@ -90,7 +90,12 @@ const resolvers = {
 
         },
         signIn: async(_, { input }, { db }) => {
-            const user = await db.collection('Users').findOne({ email: input.email })
+            const user = await db.collection('Users').findOne({ email: input.email });
+
+            if(!user) {
+                throw new Error("Invalid credentials");
+            }
+            // console.log("This is the user", user);
         }
     },
 
