@@ -96,8 +96,8 @@ const resolvers = {
 
     User: {
         id: (root) => {
-            console.log(root);
-            return 'hello';
+            // console.log(root);
+            return root._id;
         }
     }
 };
