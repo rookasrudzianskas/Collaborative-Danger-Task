@@ -73,14 +73,20 @@ const resolvers = {
         signUp: async (_, {input}, {db}) => {
             // console.log(input);
             const hashedPassword = bcrypt.hashSync(input.password);
-            const user = {
+            const newUser = {
                 ...input,
                 password: hashedPassword
             }
             // save to the database
 
-            const result = await db.collection('Users').insert(user);
-            console.log(result);
+            const result = await db.collection('Users').insert(newUser);
+            // console.log("This is the result", result);
+
+            const user = result.ops[0]
+            return {
+                user,
+                token: 'token'
+            }
 
         },
         signIn: () => {
