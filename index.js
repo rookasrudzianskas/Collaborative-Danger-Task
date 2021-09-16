@@ -4,9 +4,14 @@ const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
 // const {DB_URI, DB_NAME} = process.env;
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const DB_URI="mongodb+srv://admin:admin@cluster0.nrccl.mongodb.net/taskade?retryWrites=true&w=majority";
 const DB_NAME="taskade"
+
+const getToken = (user) => {
+    jwt.sign({id: user.id}, '', {expiredIn: '7 days'});
+}
 
 dotenv.config();
 
