@@ -9,6 +9,11 @@ const DB_NAME="taskade"
 dotenv.config();
 
 const typeDefs = gql`
+    
+    type Query {
+        myTaskLists: [TaskLists!]!
+    }
+    
     type User {
         id: ID!
         name: String!
