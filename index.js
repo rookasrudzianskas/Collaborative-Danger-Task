@@ -23,6 +23,7 @@ const typeDefs = gql`
         progress: Float!
         
         users: [User!]!
+#        todos
     }
 
 `;
