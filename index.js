@@ -124,7 +124,16 @@ const start = async() => {
     const context = {
         db,
     }
-    const server = new ApolloServer({typeDefs, resolvers, context});
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context: ({ req }) => {
+
+            return {
+                db,
+            }
+        },
+    });
 
     server.listen().then(({url}) => {
         console.log(`🚀  Server ready at ${url}`);
