@@ -145,7 +145,7 @@ const start = async() => {
         context: async ({req}) => {
             // console.log(req.headers)
             const user = await getUserFromToken(req.headers.authorization, db);
-            console.log(user);
+            // console.log(user);
             return {
                 db,
                 user,
