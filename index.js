@@ -67,6 +67,14 @@ const typeDefs = gql`
 const resolvers = {
     Query: {
         myTaskLists: () => []
+    },
+    Mutation: {
+        signUp: () => {
+
+        },
+        signIn: () => {
+
+        }
     }
 };
 // console.log("THIS IS DB", DB_URI);
