@@ -1,6 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
+const {DB_URI, DB_NAME} = process.env;
 
 dotenv.config();
 
@@ -16,9 +17,7 @@ const books = [
 ];
 
 
-
-const uri = "";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
     const collection = client.db("test").collection("devices");
     // perform actions on the collection object
