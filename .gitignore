@@ -2,3 +2,5 @@ node_modules/
 package.json
 yarn.lock
 yarn-error.log
+.idea/
+.idea/
