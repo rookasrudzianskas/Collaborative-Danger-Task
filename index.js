@@ -15,6 +15,15 @@ const typeDefs = gql`
         myTaskLists: [TaskList!]!
     }
     
+    type Mutation {
+        signUp(email: String!, password: String!, name: String!, avatar: String): AuthUser
+    }
+    
+    type AuthUser {
+        user: User!
+        token: String!
+    }
+    
     type User {
         id: ID!
         name: String!
