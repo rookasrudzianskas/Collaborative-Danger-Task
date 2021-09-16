@@ -17,12 +17,7 @@ const books = [
 ];
 
 
-const client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-});
+
 
 
 
@@ -53,6 +48,11 @@ const resolvers = {
         books: () => books,
     },
 };
+
+const start = async() => {
+    const client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await client.connect();
+}
 
 
 // The ApolloServer constructor requires two parameters: your schema
