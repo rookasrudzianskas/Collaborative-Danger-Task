@@ -128,7 +128,8 @@ const start = async() => {
         typeDefs,
         resolvers,
         context: ({ req }) => {
-
+            // console.log(req.headers)
+            const user = getUserFromToken(req.headers.authorization, db);
             return {
                 db,
             }
