@@ -15,6 +15,12 @@ const typeDefs = gql`
         email: String! 
         avatar: String!
     }
+    
+    type TaskList {
+        id: ID!
+        createdAt: String!
+        
+    }
 
 `;
 
