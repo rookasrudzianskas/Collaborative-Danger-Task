@@ -95,7 +95,7 @@ const resolvers = {
     },
 
     User: {
-        id: ({ _id }) => _id
+        id: ({ _id, id }) => _id || id
     }
 };
 // console.log("THIS IS DB", DB_URI);
