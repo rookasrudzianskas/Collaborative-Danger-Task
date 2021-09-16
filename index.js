@@ -1,4 +1,3 @@
-
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb');
