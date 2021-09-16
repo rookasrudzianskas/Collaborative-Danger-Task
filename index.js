@@ -3,7 +3,7 @@ const { ApolloServer, gql } = require('apollo-server');
 const books = [
     {
         title: 'The Awakening',
-        author: 'Kate Chopin',
+        author: 'Rokas Rudzianskas',
     },
     {
         title: 'City of Glass',
