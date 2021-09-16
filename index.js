@@ -1,6 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 // const {DB_URI, DB_NAME} = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -10,6 +10,16 @@ const DB_NAME="taskade"
 const JWT_SECRET='dsfasdjflsdflksdkfjdlskf';
 
 const getToken = (user) => jwt.sign({id: user.id}, JWT_SECRET, {expiresIn: '7 days'});
+const getUserFromToken = async (token, db) => {
+    if(!token) {
+        return null
+    }
+    const tokenData = jwt.verify(token, JWT_SECRET);
+    if(!tokenData?.id) {
+        return null;
+    }
+    return await db.collection('Users').findOne({ _id: ObjectId(tokenData.id) });
+}
 
 dotenv.config();
 
@@ -132,6 +142,7 @@ const start = async() => {
             const user = getUserFromToken(req.headers.authorization, db);
             return {
                 db,
+                user,
             }
         },
     });
