@@ -52,6 +52,7 @@ const resolvers = {
 const start = async() => {
     const client = new MongoClient(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
+    const db = client.db(DB_NAME);
 }
 
 
