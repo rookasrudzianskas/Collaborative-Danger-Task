@@ -98,6 +98,14 @@ const resolvers = {
 
             // we need to check if the password is correct
             const isPasswordCorrect = bcrypt.compareSync(input.password, user.password);
+            if(!isPasswordCorrect) {
+                throw new Error('Invalid credentials');
+            }
+
+            return {
+                user,
+                token: 'token',
+            }
 
         }
     },
