@@ -88,7 +88,7 @@ const resolvers = {
         myTaskLists: () => []
     },
     Mutation: {
-        // could be the user with db,
+        // could be the user with db
         signUp: async (_, {input}, {db}) => {
             // console.log(input);
             const hashedPassword = bcrypt.hashSync(input.password);
