@@ -211,10 +211,18 @@ const resolvers = {
             taskList.userIds.push(ObjectID(userId));
             return taskList;
         },
-        createToDo: async(_, { id }, { db, user }) => {
+        createToDo: async(_, { content, taskListId }, { db, user }) => {
             if(!user) {
                 throw new Error("Authentication failed, please sign in again");
             }
+
+            const newToDo = {
+                content,
+                taskListId,
+                isCompleted: false,
+            }
+            const result = await db.collection('ToDo').insert(newToDo);
+            return result.ops[0];
 
 
         }
