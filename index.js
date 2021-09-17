@@ -43,6 +43,7 @@ const typeDefs = gql`
         updateTaskList(id: ID!, title: String!): TaskList!
         deleteTaskList(id: ID!): Boolean!
         addUserToTaskList(taskListId: ID!, userId: ID!): TaskList
+        createToDo(content: String!, taskListId: ID!): ToDo!
         
     }
     
@@ -210,6 +211,13 @@ const resolvers = {
             taskList.userIds.push(ObjectID(userId));
             return taskList;
         },
+        createToDo: async(_, { id }, { db, user }) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+
+
+        }
 
     },
 
