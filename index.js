@@ -135,13 +135,25 @@ const resolvers = {
             const newTaskList = {
                 title,
                 createdAt: new Date().toISOString(),
-
+                userIds: [user._id]
             }
+
+            const result = await db.collection('Task List').insert(newTaskList);
+            return result.ops[0];
+
         }
     },
 
     User: {
         id: ({ _id, id }) => _id || id
+    },
+    TaskList: {
+        id: ({ _id, id }) => _id || id,
+        progress: () => 0,
+        users: ({userIds}, _, { db }) => {
+            // console.log(userIds);
+            userIds.map((userId) => db.collection('User').findOne({ _id: userId }));
+        }
     }
 };
 // console.log("THIS IS DB", DB_URI);
