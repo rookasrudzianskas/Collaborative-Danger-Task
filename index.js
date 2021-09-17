@@ -1,6 +1,6 @@
 const { ApolloServer, gql } = require('apollo-server');
 const dotenv = require('dotenv');
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient, ObjectID } = require('mongodb');
 // const {DB_URI, DB_NAME} = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -23,7 +23,7 @@ const getUserFromToken = async (token, db) => {
     if(!tokenData?.id) {
         return null;
     }
-    return await db.collection('Users').findOne({ _id: ObjectId(tokenData.id) });
+    return await db.collection('Users').findOne({ _id: ObjectID(tokenData.id) });
 }
 
 dotenv.config();
@@ -40,6 +40,7 @@ const typeDefs = gql`
         
         createTaskList(title: String!): TaskList!
         updateTaskList(id: ID!, title: String!): TaskList!
+        deleteTaskList(id: ID!): Boolean!
     }
     
     input SignUpInput {
@@ -166,6 +167,14 @@ const resolvers = {
             // console.log("This is ", result)
             return await db.collection('TaskList').findOne({ _id: ObjectID(id) })
         },
+        deleteTaskList: async(_, { id }, { db, user }) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+        //    @TODO only collaborators of this task list, should be able delete
+            await db.collection('TaskList').removeOne({ _id: ObjectID(id) });
+            return true;
+        }
     },
 
     User: {
