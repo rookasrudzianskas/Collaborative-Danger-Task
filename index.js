@@ -32,6 +32,7 @@ const typeDefs = gql`
     
     type Query {
         myTaskLists: [TaskList!]!
+        getTaskList(id: ID!): TaskList
     }
     
     type Mutation {
@@ -41,6 +42,7 @@ const typeDefs = gql`
         createTaskList(title: String!): TaskList!
         updateTaskList(id: ID!, title: String!): TaskList!
         deleteTaskList(id: ID!): Boolean!
+        
     }
     
     input SignUpInput {
@@ -97,7 +99,13 @@ const resolvers = {
             return await db.collection('TaskList')
                 .find({ userIds: user._id })
                 .toArray();
-        }
+        },
+        getTaskList: async(_, { id }, { db, user }) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+            return await db.collection('TaskList').findOne({ _id: ObjectID(id) });
+        },
     },
     Mutation: {
         // could be the user with db
@@ -174,7 +182,9 @@ const resolvers = {
            // @TODO only collaborators of this task list, should be able delete
             await db.collection('TaskList').removeOne({ _id: ObjectID(id) });
             return true;
-        }
+        },
+
+
     },
 
     User: {
