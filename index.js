@@ -211,8 +211,6 @@ const resolvers = {
             return taskList;
         },
 
-
-
     },
 
     User: {
