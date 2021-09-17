@@ -35,8 +35,10 @@ const typeDefs = gql`
     }
     
     type Mutation {
-        signUp(input: SignUpInput): AuthUser!
-        signIn(input: SignInInput): AuthUser!
+        signUp(input: SignUpInput!): AuthUser!
+        signIn(input: SignInInput!): AuthUser!
+        
+        createTaskList(title: String!): TaskList!
     }
     
     input SignUpInput {
@@ -72,6 +74,7 @@ const typeDefs = gql`
         users: [User!]!
         todos: [ToDo!]!
     }
+
     
     type ToDo {
         id: ID!
