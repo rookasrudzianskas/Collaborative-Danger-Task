@@ -280,5 +280,3 @@ const start = async() => {
 
 start();
 
-
-// it actually works quite well
