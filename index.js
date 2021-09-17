@@ -88,7 +88,9 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        myTaskLists: () => []
+        myTaskLists: (_, _, { db, user }) => {
+            const taskList = db.collection('TaskList')
+        }
     },
     Mutation: {
         // could be the user with db
