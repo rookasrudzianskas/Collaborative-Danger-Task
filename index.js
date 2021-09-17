@@ -88,8 +88,8 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        myTaskLists: (_, _, { db, user }) => {
-            const taskList = db.collection('TaskList')
+        myTaskLists: async (_, _, {db, user}) => {
+            const taskList = await db.collection('TaskList').find({  })
         }
     },
     Mutation: {
