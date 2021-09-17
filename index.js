@@ -171,7 +171,7 @@ const resolvers = {
             if(!user) {
                 throw new Error("Authentication failed, please sign in again");
             }
-        //    @TODO only collaborators of this task list, should be able delete
+           // @TODO only collaborators of this task list, should be able delete
             await db.collection('TaskList').removeOne({ _id: ObjectID(id) });
             return true;
         }
