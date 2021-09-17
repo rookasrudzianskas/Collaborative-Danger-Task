@@ -39,6 +39,7 @@ const typeDefs = gql`
         signIn(input: SignInInput!): AuthUser!
         
         createTaskList(title: String!): TaskList!
+        updateTaskList(id: ID!, title: String!): TaskList!
     }
     
     input SignUpInput {
@@ -148,7 +149,23 @@ const resolvers = {
             const result = await db.collection('TaskList').insert(newTaskList);
             return result.ops[0];
 
-        }
+        },
+        updateTaskList: async(_, { id, title }, {db, user}) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+
+            const result = await db.collection('TaskList')
+                .updateOne({
+                    _id: ObjectID(id)
+                }, {
+                    $set: {
+                        title: title
+                    }
+                })
+            // console.log("This is ", result)
+            return await db.collection('TaskList').findOne({ _id: ObjectID(id) })
+        },
     },
 
     User: {
