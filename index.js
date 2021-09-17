@@ -150,10 +150,7 @@ const resolvers = {
     TaskList: {
         id: ({ _id, id }) => _id || id,
         progress: () => 0,
-        users: ({userIds}, _, { db }) => {
-            // console.log(userIds);
-            userIds.map((userId) => db.collection('User').findOne({ _id: userId }));
-        }
+        users: async ({userIds}, _, { db }) => (userIds.map((userId) => await db.collection('User').findOne({ _id: userId })))
     }
 };
 // console.log("THIS IS DB", DB_URI);
