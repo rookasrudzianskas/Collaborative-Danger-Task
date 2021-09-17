@@ -125,6 +125,18 @@ const resolvers = {
                 token: getToken(user),
             }
 
+        },
+
+        createTaskList: async(_, { title }, {db, user }) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+
+            const newTaskList = {
+                title,
+                createdAt: new Date().toISOString(),
+
+            }
         }
     },
 
