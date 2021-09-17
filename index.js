@@ -236,7 +236,13 @@ const resolvers = {
         id: ({ _id, id }) => _id || id,
         progress: () => 0,
         users: async ({userIds}, _, { db }) => Promise.all(userIds.map((userId) => (db.collection('Users').findOne({ _id: userId })))),
-    }
+    },
+    ToDo: {
+        id: ({ _id, id }) => _id || id,
+        taskList: async ({ taskListId }, _, { db }) => (
+            await db.collection('TaskList').findOne({ _id: ObjectID(taskListId) })
+        )
+    },
 };
 // console.log("THIS IS DB", DB_URI);
 
