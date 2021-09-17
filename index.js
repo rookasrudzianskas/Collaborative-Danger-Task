@@ -88,8 +88,13 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        myTaskLists: async (_, _, {db, user}) => {
-            const taskList = await db.collection('TaskList').find({  })
+        myTaskLists: async (_, __, {db, user}) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+            return await db.collection('TaskList')
+                .find({ userIds: user._id })
+                .toArray();
         }
     },
     Mutation: {
@@ -140,7 +145,7 @@ const resolvers = {
                 userIds: [user._id]
             }
 
-            const result = await db.collection('Task List').insert(newTaskList);
+            const result = await db.collection('TaskList').insert(newTaskList);
             return result.ops[0];
 
         }
