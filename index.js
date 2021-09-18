@@ -279,7 +279,6 @@ const resolvers = {
         )
     },
 };
-// console.log("THIS IS DB", DB_URI);
 
 
 const start = async() => {
