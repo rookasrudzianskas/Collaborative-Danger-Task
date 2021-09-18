@@ -226,7 +226,25 @@ const resolvers = {
             return result.ops[0];
 
 
-        }
+        },
+
+        updateToDo: async(_, data, {db, user}) => {
+            if(!user) {
+                throw new Error("Authentication failed, please sign in again");
+            }
+
+            const result = await db.collection('ToDo')
+                .updateOne({
+                    _id: ObjectID(id)
+                }, {
+                    $set: {
+                        data: data
+                    }
+                })
+            // console.log("This is ", result)
+            return await db.collection('TaskList').findOne({ _id: ObjectID(id) })
+        },
+
 
     },
 
