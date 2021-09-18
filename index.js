@@ -44,6 +44,7 @@ const typeDefs = gql`
         deleteTaskList(id: ID!): Boolean!
         addUserToTaskList(taskListId: ID!, userId: ID!): TaskList
         createToDo(content: String!, taskListId: ID!): ToDo!
+        updateToDo(id: ID!, content: String, isComplete: Boolean): ToDo!
         
     }
     
