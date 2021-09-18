@@ -235,14 +235,14 @@ const resolvers = {
 
             const result = await db.collection('ToDo')
                 .updateOne({
-                    _id: ObjectID(id)
+                    _id: ObjectID(data.id)
                 }, {
                     $set: {
                         data: data
                     }
                 })
             // console.log("This is ", result)
-            return await db.collection('TaskList').findOne({ _id: ObjectID(id) })
+            return await db.collection('ToDo').findOne({ _id: ObjectID(data.id) })
         },
 
 
