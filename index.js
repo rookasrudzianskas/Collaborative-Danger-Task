@@ -218,7 +218,7 @@ const resolvers = {
 
             const newToDo = {
                 content,
-                taskListId,
+                taskListId: ObjectID(taskListId),
                 isCompleted: false,
             }
             const result = await db.collection('ToDo').insert(newToDo);
