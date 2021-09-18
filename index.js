@@ -44,7 +44,7 @@ const typeDefs = gql`
         deleteTaskList(id: ID!): Boolean!
         addUserToTaskList(taskListId: ID!, userId: ID!): TaskList
         createToDo(content: String!, taskListId: ID!): ToDo!
-        updateToDo(id: ID!, content: String, isComplete: Boolean): ToDo!
+        updateToDo(id: ID!, content: String, isCompleted: Boolean): ToDo!
         
     }
     
@@ -228,21 +228,17 @@ const resolvers = {
 
         },
 
-        updateToDo: async(_, data, {db, user}) => {
-            if(!user) {
-                throw new Error("Authentication failed, please sign in again");
-            }
+        updateToDo: async(_, data, { db, user }) => {
+            if (!user) { throw new Error('Authentication Error. Please sign in'); }
 
             const result = await db.collection('ToDo')
                 .updateOne({
                     _id: ObjectID(data.id)
                 }, {
-                    $set: {
-                        data: data
-                    }
+                    $set: data
                 })
-            // console.log("This is ", result)
-            return await db.collection('ToDo').findOne({ _id: ObjectID(data.id) })
+
+            return await db.collection('ToDo').findOne({ _id: ObjectID(data.id) });
         },
 
 
